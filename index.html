@@ -33,29 +33,33 @@
       </header>
 
     <div class="container-fluid">
-        <div class="mainpage row justify-content-around">
+        <div class="mainpage row justify-content-around" media="(max-width: 768px)">
+            <div class="col-12">
             <form class="col ms-2">
                 <h2 class="mt-2">Search for a City:</h2>
                 <div class="col-12">
                     <input id="searchInput" type="text" class="form-control form-control-lg"
                         placeholder="Enter a City Name or ZIP Code™" aria-label="Enter a City Name or ZIP Code™ ">
                 </div>
-                <div class="row mt-3 mb-3 justify-content-around">
+                <div class="row mt-3 mb-3 col justify-content-around">
                     <button class="col-3 btn" type="button" id="searchBtn">
-                        <i class="fa-solid fa-magnifying-glass"></i> Search
+                        <i class="fa-solid fa-magnifying-glass"></i> 
+                        <span class="d-sm-inline">Search</span>
                     </button>
                     <button class="col-3 btn" type="button" id="locateBtn">
-                        <i class="fa-solid fa-earth-americas"></i> Your Location
+                        <i class="fa-solid fa-earth-americas"></i> 
+                        <span class="d-sm-inline">Your Location</span>
                     </button>
                     <button class="col-3 btn" type="button" id="clearBtn">
-                        <i class="fa-solid fa-eraser fa-lg"></i> Clear
+                        <i class="fa-solid fa-eraser fa-lg"></i> 
+                        <span class="d-sm-inline">Clear</span>
                     </button>
                 </div>
                 <ul class="col-12 fs-3 list-group list-group-flush text-center" id="history" style="cursor: pointer;">
                 </ul>
             </form>
 
-            <div class="col-8 mt-3 me-3 d-none" id="weathers">
+            <div class="col-12 mt-3 me-3 d-none" id="weathers">
                 <div class="col">
                     <div class="col center card" id="currentWeather">
                         <div class="text-center card-body">
@@ -83,8 +87,8 @@
                         <h4 class="modal-title fs-4" id="alertModalLabel">Oops...</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="col modal-body  fs-3 text-light text-center">
-                        An invald city name is entered.
+                    <div class="col modal-body  fs-3 text-center">
+                        An invald city name was entered!
                         <br>
                         Please enter a valid city name.
                     </div>

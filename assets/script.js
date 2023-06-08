@@ -6,7 +6,7 @@ function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadG
       src: `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places&callback=${callbackInitMap}`,
     })
     
-  };
+    };
   
   loadGoogleMapsApi("initMap"); // call the fuinction where 'initMap' is the argument that for the callback function.
   //below is where the script populate the map window and pop up a window saying 'Location Found' within the map area when the location is found.
