@@ -24,13 +24,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Monomaniac+One&family=Rubik+Puddles&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./Assets/CSS/style.css">
+    <link rel="stylesheet" href="./assets/styles.css">
 </head>
 
 <body>
-    <header class="container-fluid p-3 bg-primary bg-gradient text-light text-center">
+    <header class="container-fluid p-3 text-center">
         <h1>Weather Dashboard</h1>
-    </header>
+      </header>
 
     <div class="container-fluid">
         <div class="mainpage row justify-content-around">
@@ -41,13 +41,13 @@
                         placeholder="Enter a City Name or ZIP Code™" aria-label="Enter a City Name or ZIP Code™ ">
                 </div>
                 <div class="row mt-3 mb-3 justify-content-around">
-                    <button class="col-3 btn btn-primary opacity-75" type="button" id="searchBtn">
+                    <button class="col-3 btn" type="button" id="searchBtn">
                         <i class="fa-solid fa-magnifying-glass"></i> Search
                     </button>
-                    <button class="col-3 btn btn-primary opacity-75" type="button" id="locateBtn">
+                    <button class="col-3 btn" type="button" id="locateBtn">
                         <i class="fa-solid fa-earth-americas"></i> Your Location
                     </button>
-                    <button class="col-3 btn btn-primary opacity-75" type="button" id="clearBtn">
+                    <button class="col-3 btn" type="button" id="clearBtn">
                         <i class="fa-solid fa-eraser fa-lg"></i> Clear
                     </button>
                 </div>
@@ -57,7 +57,7 @@
 
             <div class="col-8 mt-3 me-3 d-none" id="weathers">
                 <div class="col">
-                    <div class="col center bg-light bg-gradient card" id="currentWeather">
+                    <div class="col center card" id="currentWeather">
                         <div class="text-center card-body">
                             <h3 id="city-name"></h3>
                             <img id="current-pic">
@@ -75,21 +75,21 @@
                 </div>
             </div>
         </div>
-        <!-- I want to build an bootstrap alert modal to inform the users if a invalid city name is entered-->
+        <!-- I want to build a bootstrap alert modal to inform the users if a invalid city name is entered-->
         <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="col modal-header bg-warning bg-gradient opacity-75">
-                        <h4 class="modal-title text-light fs-4" id="alertModalLabel">Oops...</h4>
+                    <div class="col modal-header">
+                        <h4 class="modal-title fs-4" id="alertModalLabel">Oops...</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="col modal-body bg-warning bg-gradient opacity fs-3 text-light text-center">
+                    <div class="col modal-body  fs-3 text-light text-center">
                         An invald city name is entered.
                         <br>
                         Please enter a valid city name.
                     </div>
-                    <div class="col modal-footer modal-body bg-warning bg-gradient opacity-50">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="col modal-footer modal-body">
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

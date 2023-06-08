@@ -1,0 +1,38 @@
+#history li:hover {
+    cursor: pointer;
+}
+
+#alertModal {
+    font-family: 'Cherry Bomb One', cursive;
+}
+
+.mainpage {
+    font-family: 'Monomaniac One',
+        sans-serif;
+}
+
+h1 {
+    font-family: 'Cherry Bomb One', cursive;
+    background-color: #C4DFDF;
+    color: #27374D;
+}
+
+body {
+    background-color: #C4DFDF;
+}
+
+.btn {
+    background-color: #9DB2BF;
+}
+
+#searchInput {
+    background-color: #E3F4F4;
+}
+
+#currentWeather {
+    background-color: #C4DFDF;
+}
+
+#alertModal {
+    background-color: #C4DFDF;
+}
