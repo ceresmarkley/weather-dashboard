@@ -192,14 +192,24 @@ $(function () {
     });
   
     function renderCities() {
+      // Empty the history element
       historyEl.empty();
-  
-      for (var i = searchHistory.length; i >= 0; i--) {
+    
+      // Loop through the search history
+      for (var i = searchHistory.length - 1; i >= 0; i--) {
+        // Get the city input
         var cityInput = searchHistory[i];
+    
+        // Create a new list item
         var cityDiv = $("<li>").addClass("list-group-item").text(cityInput);
-        cityDiv.on("click", function () {
+    
+        // Add an onclick event listener to the list item
+        cityDiv.on("click", function() {
+          // Fetch the weather data for the city
           fetchWeatherData($(this).text());
         });
+    
+        // Append the list item to the history element
         historyEl.append(cityDiv);
       }
     }
