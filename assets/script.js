@@ -126,7 +126,7 @@ $(function () {
       const forecastContainer = $("#forecast");
       forecastContainer.empty();
   
-      let dailyData = forecastData.list.filter(item => item.dt_txt.includes("12:00:00")); // get rid off the times in the string
+      let dailyData = forecastData.list.filter(item => item.dt_txt.includes("00:00:00")); // get rid off the times in the string
       console.log(dailyData) //I log the dailyData to check the arrays
       for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
         const forecast = dailyData[i];
@@ -140,9 +140,12 @@ $(function () {
         const month = date.getMonth() + 1; //month array starts at 0 so add 1 for Jan
         const year = date.getFullYear();
         const shortDate = `${month}/${day}/${year}`; //put them together can name it shortDate
+        const dayOfWeek = new Date(shortDate).getDay();
+        const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   
         const forecastCard = $("<div>").addClass("col forecast m-1 bg-secondary bg-gradient text-white rounded");
         const forecastContent = $("<div>").addClass("col") //add the class col to make the cards display evenly regardless screensize
+          .append($("<p>").addClass("mt-2 fs-4").text(daysOfTheWeek[dayOfWeek]))
           .append($("<p>").addClass("mt-2 fs-4").text(shortDate))
           .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) //make the icon 2x size
           .append($("<p>").text(`Temp: ${forecastTemperature.toFixed(0)} °F`)) //round to no decimals
