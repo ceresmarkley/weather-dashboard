@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛅</text></svg>">
+
     <!-- Font Awesome Kit API -->
     <script src="https://kit.fontawesome.com/2ca4a978bf.js" crossorigin="anonymous" defer></script>
     <!-- Link jQuery -->
@@ -29,12 +31,11 @@
 
 <body>
     <header class="container-fluid p-3 text-center">
-        <h1>Weather Dashboard</h1>
+        <h1>⛅ Weather Dashboard ⛅</h1>
       </header>
 
     <div class="container-fluid">
-        <div class="mainpage row justify-content-around" media="(max-width: 768px)">
-            <div class="col-12">
+        <div class="mainpage row justify-content-around">
             <form class="col ms-2">
                 <h2 class="mt-2">Search for a City:</h2>
                 <div class="col-12">
@@ -55,22 +56,22 @@
                         <span class="d-sm-inline">Clear</span>
                     </button>
                 </div>
-                <ul class="col-12 fs-3 list-group list-group-flush text-center" id="history" style="cursor: pointer;">
-                </ul>
             </form>
 
-            <div class="col-12 mt-3 me-3 d-none" id="weathers">
-                <div class="col">
-                    <div class="col center card" id="currentWeather">
-                        <div class="text-center card-body">
-                            <h3 id="city-name"></h3>
-                            <img id="current-pic">
-                            <p id="temp"></p>
-                            <p id="wind"></p>
-                            <p id="humidity"></p>
-                        </div>
+            <div class="row mt-3 d-none" id="weathers">
+                <div class="col-12">
+                    <ul class="fs-3 list-group text-center" id="history" style="cursor: pointer;">
+                    </ul>
+                    <div class="row center card" id="currentWeather">
+                      <div class="text-center card-body">
+                        <h3 id="city-name"></h3>
+                        <img id="current-pic">
+                        <p id="temp"></p>
+                        <p id="wind"></p>
+                        <p id="humidity"></p>
+                      </div>
                     </div>
-                </div>
+                  </div>
 
                 <div>
                     <h3 class="mt-3 text-center">5-Day Forecast</h3>
@@ -99,7 +100,11 @@
             </div>
         </div>
     </div>
+    <footer>
+        <h5 class="text-center"> Designed, Coded, and 🌳 Cultivated by Ceres 💪 Markley™</h5>
+    </footer>
     <script src="./assets/script.js" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3wdjSIwPsmO3w4qA5nxEOWcDdHp8Yj4c&libraries=places"></script>
 </body>
 
 </html>

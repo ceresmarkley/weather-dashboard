@@ -1,69 +1,3 @@
-// google map API key
-const googleApiKey = "AIzaSyC3wdjSIwPsmO3w4qA5nxEOWcDdHp8Yj4c";
-// the two urls used, I noticed as long as you got initMap in the callback it doesn't matter which one I use
-function loadGoogleMapsApi(callbackInitMap) { //here I write a function to loadGoogleMapApi and append it to head
-    $("<script />", { //the argument callbackInitMap has a value of 'initMap' when this function is called.
-      src: `https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places&callback=${callbackInitMap}`,
-    })
-    
-    };
-  
-  loadGoogleMapsApi("initMap"); // call the fuinction where 'initMap' is the argument that for the callback function.
-  //below is where the script populate the map window and pop up a window saying 'Location Found' within the map area when the location is found.
-  
-  // below I pretty much copied from google map api doc
-  let map, infoWindow;
-  
-  function initMap() { //write a function for initMap as indicated in the url tag
-    map = new google.maps.Map($("#map")[0], {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 6,
-    });
-    infoWindow = new google.maps.InfoWindow();
-  
-    let autocomplete = new google.maps.places.Autocomplete($("#locationInput")[0], {
-      types: ["(cities)"]
-    });
-  
-    $("#getCityBtn").click(() => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            };
-  
-            infoWindow.setPosition(pos);
-            infoWindow.setContent("Current Location");
-            infoWindow.open(map);
-            map.setCenter(pos);
-  
-            const geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ location: pos }, (results, status) => {
-              if (status === "OK") {
-                if (results[0]) {
-                  const cityName = getCityNameFromResults(results);
-                  $("#locationInput").val(cityName);
-                } else {
-                  console.log("No results found");
-                }
-              } else {
-                console.log("Geocoder failed due to: " + status);
-              }
-            });
-          },
-          () => {
-            handleLocationError(true, infoWindow, map.getCenter());
-          }
-        );
-      } else {
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-    });
-  }
-
-
 $(function () {
     const apiKey = '02045eae6d8bdfcc80db71ad84fd66e3'; //Open Weather API Key
     const historyEl = $("#history");
@@ -72,6 +6,19 @@ $(function () {
   
     let searchHistory = JSON.parse(localStorage.getItem("history")) || []; //get search history from localStorage if there's any
     let weatherData;
+
+    function getAddressComponent(components, type) {
+      for (let i = 0; i < components.length; i++) {
+      if (components[i].types.includes(type)) {
+        if (type === 'country') {
+          return components[i].short_name;
+        } else {
+          return components[i].long_name;
+        }
+      }
+    }
+      return null;
+    }
   
     function fetchWeatherData(searchInput) {
       const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}`;
@@ -158,7 +105,7 @@ $(function () {
           fetchWeatherData(cityName);
   
           // Show the weather section
-          $('#weathers').removeClass('d-none').addClass('d-block');
+          $('#weathers').removeClass('d-none').addClass('d-flex');
         })
         .catch(error => {
           console.log(error);
@@ -194,7 +141,7 @@ $(function () {
         const year = date.getFullYear();
         const shortDate = `${month}/${day}/${year}`; //put them together can name it shortDate
   
-        const forecastCard = $("<div>").addClass("col forecast bg-secondary bg-gradient text-white m-1 rounded");
+        const forecastCard = $("<div>").addClass("col forecast m-1 bg-secondary bg-gradient text-white rounded");
         const forecastContent = $("<div>").addClass("col") //add the class col to make the cards display evenly regardless screensize
           .append($("<p>").addClass("mt-2 fs-4").text(shortDate))
           .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) //make the icon 2x size
@@ -229,7 +176,7 @@ $(function () {
       if (event.which === 13) {
         event.preventDefault();
         handleFormSubmit(event);
-        $('#weathers').removeClass('d-none').addClass('d-block'); //display the weathers when enter is pressed
+        $('#weathers').removeClass('d-none').addClass('d-flex'); //display the weathers when enter is pressed
         $('#searchInput').val(''); //clean the input box and ready it for new inputs
       }
     });
@@ -240,7 +187,7 @@ $(function () {
         return;
       }
       handleFormSubmit(event);
-      $('#weathers').removeClass('d-none').addClass('d-block'); //also display the weather when search is submitted
+      $('#weathers').removeClass('d-none').addClass('d-flex'); //also display the weather when search is submitted
       $('#searchInput').val(''); //also clean out the input for incoming inputs
     });
   
@@ -262,7 +209,7 @@ $(function () {
       searchHistory = [];
       renderCities();
       $("#searchInput").val('');
-      $("#weathers").removeClass("d-block").addClass("d-none");
+      $("#weathers").removeClass("d-flex").addClass("d-none");
     });
   
     function storeSearchHistory(searchInput) {
@@ -288,7 +235,7 @@ $(function () {
         let lastSearchedCity = searchHistory[searchHistory.length - 1];
         if (lastSearchedCity) {
           fetchWeatherData(lastSearchedCity);
-          $("#weathers").removeClass("d-none").addClass("d-block");
+          $("#weathers").removeClass("d-none").addClass("d-flex");
         }
       }
     }
