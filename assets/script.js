@@ -1,25 +1,13 @@
 $(function () {
+  // Open Weather Api key with const created for localStorage history, search and locate buttons. 
   const apiKey = '02045eae6d8bdfcc80db71ad84fd66e3'; 
   const historyEl = $("#history");
   const searchInputEl = $("#searchInput");
-  const locateBtnEl = $("#locateBtn"); // Locate button element
-  let searchHistory = JSON.parse(localStorage.getItem("history")) || []; //get search history from localStorage if there's any
+  const locateBtnEl = $("#locateBtn"); 
+  // created variable that parse localStorage to get "history" of cities searched by user.
+  let searchHistory = JSON.parse(localStorage.getItem("history")) || []; 
   let weatherData;
-
-  // Autocomplete the city names...
-  function getAddressComponent(components, type) {
-    for (let i = 0; i < components.length; i++) {
-      if (components[i].types.includes(type)) {
-        if (type === 'country') {
-          return components[i].short_name;
-        } else {
-          return components[i].long_name;
-        }
-      }
-    }
-    return null;
-  }
-
+  
   function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
 
@@ -35,7 +23,8 @@ $(function () {
 
       fetchWeatherData(fullAddress);
       storeSearchHistory(fullAddress);
-      searchInputEl.value = ''; // Reset the search input field
+      // clear input field after user submission.
+      searchInputEl.value = ''; 
       $('#weathers').removeClass('d-none').addClass('d-flex');
     });
   }
@@ -90,7 +79,7 @@ $(function () {
   
         .fail(function (error) { 
           console.log(error)
-          return;
+          return;cityName
         });
     }
   }
