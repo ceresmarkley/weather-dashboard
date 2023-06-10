@@ -8,9 +8,9 @@ $(function () {
   let searchHistory = JSON.parse(localStorage.getItem("history")) || []; 
   let weatherData;
   
+  // function to initiate autocomplete API through user searchInput
   function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
-
     const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
 
     autocomplete.addListener('place_changed', function () {
@@ -23,7 +23,7 @@ $(function () {
 
       fetchWeatherData(fullAddress);
       storeSearchHistory(fullAddress);
-      // clear input field after user submission.
+      // clear input field after user submission and replacing d-none class with d-flex.
       searchInputEl.value = ''; 
       $('#weathers').removeClass('d-none').addClass('d-flex');
     });
@@ -32,17 +32,20 @@ $(function () {
   // Call the function to initialise autocomplete
   initAutocomplete();
 
-  
+  // function to featch weather data using openweather API. fetching currentweather and forecast weather arrays.
   function fetchWeatherData(searchInput) {
     const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}`;
     const forecastWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&appid=${apiKey}`;
-  
+    
+    // if condition statement that creates variable values so long as user submission is not empty.
     if (searchInput !== "") {
       let today = new Date();
       let dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][today.getDay()];
       let month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][today.getMonth()];
       let formattedDate = `${dayOfWeek} ${month} ${today.getDate()}, ${today.getFullYear()}`;
-  
+      
+      // fetch request to the currentweatherURL. If successfull the done call back is executed which will create a weatherData object for the current day
+      // weather forecast. It will also update the city-name, temp, wind, humidity, and current weather icon if the fetch is successful.
       $.getJSON(currentWeatherUrl)
         .done(function (currentData) {
           // console log to review parameter settings.
@@ -69,7 +72,7 @@ $(function () {
           alertModal.show(); 
           return;
         });
-  
+      // fetch request to forecastWeatherURL API. If successful functions getForecast, renderCities, and storeSearchHistory are called.
       $.getJSON(forecastWeatherUrl)
         .done(function (forecastData) {
           getForecast(weatherData, forecastData);
@@ -77,7 +80,7 @@ $(function () {
   
           storeSearchHistory(searchInput);
         })
-  
+        // if fail, console log fail.
         .fail(function (error) { 
           console.log(error)
           return;cityName
@@ -114,10 +117,8 @@ $(function () {
       .then(cityName => {
         // Set the current city name in the search input
         searchInputEl.val(cityName);
-  
         // Fetch weather data for the current city
-        fetchWeatherData(cityName);
-  
+        fetchWeatherData(cityName); 
         // Show the weather section
         $('#weathers').removeClass('d-none').addClass('d-flex');
       })
@@ -126,8 +127,7 @@ $(function () {
       });
   }
   
-  locateBtnEl.on('click', handleLocateButtonClick);
-  
+  locateBtnEl.on('click', handleLocateButtonClick);  
   function convertToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 9 / 5 + 32; 
   }
