@@ -137,9 +137,11 @@ $(function () {
   }
   
   function getForecast(currentWeather, forecastData) {
+    // Get the forecast container element.
     const forecastContainer = $("#forecast");
+    // Empty the forecast container.
     forecastContainer.empty();
-  
+    // Get the daily data from the forecast data.
     let dailyData = forecastData.list.filter(item => item.dt_txt.includes("00:00:00")); 
     console.log(dailyData) 
     for (let i = 0; i < dailyData.length; i++) { 
@@ -156,7 +158,8 @@ $(function () {
       const shortDate = `${month}/${day}/${year}`; 
       const dayOfWeek = new Date(shortDate).getDay();
       const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  
+      
+      //create the forecast card element and its content. Will have day of week, date, weather icon, temp, wind, and humidity.
       const forecastCard = $("<div>").addClass("col forecast m-1 bg-secondary bg-gradient text-white rounded");
       const forecastContent = $("<div>").addClass("col") 
         .append($("<p>").addClass("mt-2 fs-4").text(daysOfTheWeek[dayOfWeek]))
@@ -207,7 +210,7 @@ $(function () {
       $('#weathers').removeClass('d-none').addClass('d-flex'); 
       $('#searchInput').val(''); 
     });
-    //
+    
     function renderCities() {
       // Empty the history element
       historyEl.empty();
@@ -274,6 +277,7 @@ $(function () {
     init();
     // This function is called when the user mouses over a city in the list.
     // It changes the background color of the city to dark-blue and the text color to white.
+    // Lastly, when mouse leavesbutton area it sets button to original style settings.
     $(document).on({ 
       mouseenter: function () {
         $(this).css('background-color', '#27374D');
