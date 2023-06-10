@@ -19,5 +19,5 @@ A User is able to refresh the page and have previous history list restored. User
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/37cfd544-181b-43b7-bb1b-4bd074778b53)
 If User clicks on Clear button, it will erase previously saved local storage inputs.
 # Sources and References Used
-https://github.com/Ronin1702/Weather-Dashboard - Student Peer who assisted with code references.
+https://github.com/Ronin1702/Weather-Dashboard - Student Peer who assisted with code references.    
 https://github.com/shawn220a/weather-dashboard-damien - github user with similar project code for reference.
