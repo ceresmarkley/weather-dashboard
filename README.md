@@ -16,7 +16,7 @@ If user begins to type, google places API will create a drop down with autocompl
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/a97ea4d6-d9ae-48b9-8f2a-a633fe6d3f51)     
 A User is able to refresh the page and have previous history list restored. User is able to have multiple cities in list and click through them to review its weather forecasts.   
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/18c7a783-66db-465d-9dee-dd9772843384)
-![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/37cfd544-181b-43b7-bb1b-4bd074778b53)
+![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/37cfd544-181b-43b7-bb1b-4bd074778b53)    
 If User clicks on Clear button, it will erase previously saved local storage inputs.
 # Sources and References Used
 https://github.com/Ronin1702/Weather-Dashboard - Student Peer who assisted with code references.    
