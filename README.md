@@ -8,9 +8,9 @@ https://github.com/ceresmarkley/weather-dashboard - Repo URL
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/9f667270-e2f1-4c0d-9642-fbe6944e5f22)
 # How to Use
 User may search by entering a city name or using the "Your Location" button to select a location and find its current day and 5-day weather forecast.   
-If user begins to type, google places API will create a drop down with autocomplete options for user to choose from.
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/4aff4c47-4d41-43b5-a9bc-61f52785b61a)
 # In Use Screenshots
+If user begins to type, google places API will create a drop down with autocomplete options for user to choose from.   
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/96f898ba-d894-470c-a4bf-ebd17c4b3570)
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/08cf3234-3de9-4869-8107-3dcfc8b79b00)
 ![image](https://github.com/ceresmarkley/weather-dashboard/assets/129554518/a97ea4d6-d9ae-48b9-8f2a-a633fe6d3f51)     
