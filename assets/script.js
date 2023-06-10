@@ -11,7 +11,9 @@ $(function () {
   // function to initiate autocomplete API through user searchInput
   function initAutocomplete() {
     const searchInputEl = document.getElementById('searchInput');
-    const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
+    const autocomplete = new google.maps.places.Autocomplete(searchInputEl, {
+      types: ['(cities)']
+    });
 
     autocomplete.addListener('place_changed', function () {
       const place = autocomplete.getPlace();
