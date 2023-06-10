@@ -19,6 +19,24 @@ $(function () {
     }
       return null;
     }
+
+function initAutocomplete() {
+  const searchInputEl = document.getElementById('searchInput');
+  const autocomplete = new google.maps.places.Autocomplete(searchInputEl);
+
+  autocomplete.addListener('place_changed', function() {
+    const place = autocomplete.getPlace();
+    const city = getAddressComponent(place.address_components, 'locality');
+    const state = getAddressComponent(place.address_components, 'administrative_area_level1');
+    const country = getAddressComponent(place.address_compenents, 'country')
+    const fullAddress = [city,state, country].filter(Boolean).join(',');
+    
+    fetchWeatherData(fullAddress);
+    storeSearchHistory(fullAddress);
+    searchInputEl.value= '';
+    $('#weathers').removeClass('d-none').addClass('d-block');
+  });
+}
   
     function fetchWeatherData(searchInput) {
       const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=${apiKey}`;
@@ -197,21 +215,17 @@ $(function () {
     function renderCities() {
       // Empty the history element
       historyEl.empty();
-    
       // Loop through the search history
       for (var i = searchHistory.length - 1; i >= 0; i--) {
         // Get the city input
         var cityInput = searchHistory[i];
-    
         // Create a new list item
         var cityDiv = $("<li>").addClass("list-group-item").text(cityInput);
-    
         // Add an onclick event listener to the list item
         cityDiv.on("click", function() {
           // Fetch the weather data for the city
           fetchWeatherData($(this).text());
         });
-    
         // Append the list item to the history element
         historyEl.append(cityDiv);
       }
