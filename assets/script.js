@@ -121,6 +121,8 @@ $(function () {
         fetchWeatherData(cityName); 
         // Show the weather section
         $('#weathers').removeClass('d-none').addClass('d-flex');
+        // clear searchInput field.
+        searchInputEl.empty(); 
       })
       .catch(error => {
         console.log(error);
@@ -137,6 +139,7 @@ $(function () {
   }
   
   function getForecast(currentWeather, forecastData) {
+    $("#searchInput").val('');
     // Get the forecast container element.
     const forecastContainer = $("#forecast");
     // Empty the forecast container.
