@@ -121,8 +121,6 @@ $(function () {
         fetchWeatherData(cityName); 
         // Show the weather section
         $('#weathers').removeClass('d-none').addClass('d-flex');
-        // clear searchInput field.
-        searchInputEl.empty(); 
       })
       .catch(error => {
         console.log(error);
