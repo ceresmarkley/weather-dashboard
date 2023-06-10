@@ -45,7 +45,8 @@ $(function () {
   
       $.getJSON(currentWeatherUrl)
         .done(function (currentData) {
-          console.log(currentData) //check to see how the parameters are structured.
+          // console log to review parameter settings.
+          console.log(currentData) 
           var weatherIcon = currentData.weather[0].icon;
           weatherData = {
             temp: convertToFahrenheit(currentData.main.temp),
@@ -55,17 +56,17 @@ $(function () {
           };
           //Append texts to the targets below:
           $("#city-name").text(`Today in ${searchInput}, ${formattedDate}`);
-          $("#temp").text(`Temperature: ${weatherData.temp.toFixed(0)} °F`); //round to zero decimals, no one needs the two decimal lol
-          $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(0)} MPH`); //round to zero decimals, no one needs the two decimal lol
+          $("#temp").text(`Temperature: ${weatherData.temp.toFixed(0)} °F`); 
+          $("#wind").text(`Wind Speed: ${weatherData.wind.toFixed(0)} MPH`); 
           $("#humidity").text(`Humidity: ${weatherData.humidity}%`);
           $("#current-pic").attr("src", `https://openweathermap.org/img/wn/${weatherData.icon}@4x.png`);
   
-          storeSearchHistory(searchInput); //only store the search inputs into search history when data passes since it's inside of the .done
+          storeSearchHistory(searchInput); 
         })
   
-        .fail(function (alertModal) { //here I changed changed from error to alertModal for when the response fails
-          var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); // get the element from html
-          alertModal.show(); //show alertModal when response fails, this why it includes more than just 404
+        .fail(function (alertModal) { 
+          var alertModal = new bootstrap.Modal(document.getElementById('alertModal'), {}); 
+          alertModal.show(); 
           return;
         });
   
@@ -236,12 +237,9 @@ $(function () {
       $("#weathers").removeClass("d-flex").addClass("d-none");
     });
     // This function stores the user's search input in the local storage.
-    // It first formats the input by removing any spaces.
-    // Then, it checks to see if the input is already in the search history.
-    // If it is, it does nothing.
-    // Otherwise, it pushes the input onto the search history.
-    // The search history is limited to 5 items.
-    // Finally, it updates the local storage and renders the list of cities.
+    // It first formats the input by removing any spaces. Then, it checks to see if the input is already in the search history.
+    // If it is, it does nothing. Otherwise, it pushes the input onto the search history.
+    // The search history is limited to 5 items. Finally, it updates the local storage and renders the list of cities.
     function storeSearchHistory(searchInput) {
       searchInput = formatInput(searchInput);
   
