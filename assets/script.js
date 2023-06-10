@@ -1,5 +1,5 @@
 $(function () {
-  const apiKey = '02045eae6d8bdfcc80db71ad84fd66e3'; //OpenWeahter API Key
+  const apiKey = '02045eae6d8bdfcc80db71ad84fd66e3'; 
   const historyEl = $("#history");
   const searchInputEl = $("#searchInput");
   const locateBtnEl = $("#locateBtn"); // Locate button element
@@ -88,14 +88,14 @@ $(function () {
           storeSearchHistory(searchInput);
         })
   
-        .fail(function (error) { // we do not need to make the modal function again here since a valid city name wont fetch neither current or forecast weather.
+        .fail(function (error) { 
           console.log(error)
           return;
         });
     }
   }
   
-  // Function to get the current city name
+  
   function getCurrentCity() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -139,10 +139,10 @@ $(function () {
   locateBtnEl.on('click', handleLocateButtonClick);
   
   function convertToFahrenheit(kelvin) {
-    return (kelvin - 273.15) * 9 / 5 + 32; //Original data is in kelvin, convert it to F
+    return (kelvin - 273.15) * 9 / 5 + 32; 
   }
   
-  function convertToMilesPerHour(mps) { //Original data is in meters/second, convert it fo miles per hour
+  function convertToMilesPerHour(mps) { 
     return mps * 2.23694;
   }
   
@@ -150,30 +150,30 @@ $(function () {
     const forecastContainer = $("#forecast");
     forecastContainer.empty();
   
-    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("00:00:00")); // get rid off the times in the string
-    console.log(dailyData) //I log the dailyData to check the arrays
-    for (let i = 0; i < dailyData.length; i++) { //noon is the cut off time, date and time of O go to the next day at noon,
+    let dailyData = forecastData.list.filter(item => item.dt_txt.includes("00:00:00")); 
+    console.log(dailyData) 
+    for (let i = 0; i < dailyData.length; i++) { 
       const forecast = dailyData[i];
       const forecastDate = new Date(forecast.dt_txt);
       const forecastTemperature = convertToFahrenheit(forecast.main.temp);
       const forecastWind = convertToMilesPerHour(forecast.wind.speed);
       const forecastHumidity = forecast.main.humidity;
       const forecastIcon = forecast.weather[0].icon;
-      const date = new Date(forecastDate); //make a shorter date format so that it will fit in the cards
+      const date = new Date(forecastDate); 
       const day = date.getDate();
-      const month = date.getMonth() + 1; //month array starts at 0 so add 1 for Jan
+      const month = date.getMonth() + 1; 
       const year = date.getFullYear();
-      const shortDate = `${month}/${day}/${year}`; //put them together can name it shortDate
+      const shortDate = `${month}/${day}/${year}`; 
       const dayOfWeek = new Date(shortDate).getDay();
       const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   
       const forecastCard = $("<div>").addClass("col forecast m-1 bg-secondary bg-gradient text-white rounded");
-      const forecastContent = $("<div>").addClass("col") //add the class col to make the cards display evenly regardless screensize
+      const forecastContent = $("<div>").addClass("col") 
         .append($("<p>").addClass("mt-2 fs-4").text(daysOfTheWeek[dayOfWeek]))
         .append($("<p>").addClass("mt-2 fs-4").text(shortDate))
-        .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) //make the icon 2x size
-        .append($("<p>").text(`Temp: ${forecastTemperature.toFixed(0)} °F`)) //round to no decimals
-        .append($("<p>").text(`Wind: ${forecastWind.toFixed(0)} MPH`)) //round to no decimals
+        .append($("<img>").attr("src", `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`)) 
+        .append($("<p>").text(`Temp: ${forecastTemperature.toFixed(0)} °F`)) 
+        .append($("<p>").text(`Wind: ${forecastWind.toFixed(0)} MPH`)) 
         .append($("<p>").text(`Humidity: ${forecastHumidity}%`));
   
       forecastCard.append(forecastContent);
@@ -181,7 +181,7 @@ $(function () {
     }
   }
   
-  function formatInput(input) { //make a function to ensure all inputs are recordede with first letter capitalized in each word
+  function formatInput(input) { 
     let words = input.toLowerCase().split(' ');
     for (let i = 0; i < words.length; i++) {
       words[i] = words[i][0].toUpperCase() + words[i].substr(1);
@@ -203,8 +203,8 @@ $(function () {
       if (event.which === 13) {
         event.preventDefault();
         handleFormSubmit(event);
-        $('#weathers').removeClass('d-none').addClass('d-flex'); //display the weathers when enter is pressed
-        $('#searchInput').val(''); //clean the input box and ready it for new inputs
+        $('#weathers').removeClass('d-none').addClass('d-flex'); 
+        $('#searchInput').val(''); 
       }
     });
   
@@ -214,10 +214,10 @@ $(function () {
         return;
       }
       handleFormSubmit(event);
-      $('#weathers').removeClass('d-none').addClass('d-flex'); //also display the weather when search is submitted
-      $('#searchInput').val(''); //also clean out the input for incoming inputs
+      $('#weathers').removeClass('d-none').addClass('d-flex'); 
+      $('#searchInput').val(''); 
     });
-  
+    //
     function renderCities() {
       // Empty the history element
       historyEl.empty();
@@ -236,15 +236,23 @@ $(function () {
         historyEl.append(cityDiv);
       }
     }
-  
-    $("#clearBtn").on("click", function () { //make a clear button to clear all histories
+    // This function is called when the user clicks on the "Clear" button.
+    // It clears the local storage, the search history, and the search input field.
+    // It also hides the weather forecast.
+    $("#clearBtn").on("click", function () { 
       localStorage.clear();
       searchHistory = [];
       renderCities();
       $("#searchInput").val('');
       $("#weathers").removeClass("d-flex").addClass("d-none");
     });
-  
+    // This function stores the user's search input in the local storage.
+    // It first formats the input by removing any spaces.
+    // Then, it checks to see if the input is already in the search history.
+    // If it is, it does nothing.
+    // Otherwise, it pushes the input onto the search history.
+    // The search history is limited to 5 items.
+    // Finally, it updates the local storage and renders the list of cities.
     function storeSearchHistory(searchInput) {
       searchInput = formatInput(searchInput);
   
@@ -259,7 +267,10 @@ $(function () {
       localStorage.setItem("Current City", searchInput);
       renderCities();
     }
-  
+    // This function initializes the application.
+    // It first checks to see if there is any search history stored in the local storage.
+    // If there is, it loads the search history and renders the list of cities.
+    // It also fetches the weather data for the last searched city and displays it.
     function init() {
       if (localStorage.getItem("Search History")) {
         searchHistory = JSON.parse(localStorage.getItem("Search History"));
@@ -274,12 +285,12 @@ $(function () {
     }
   
     init();
-  
-    $(document).on({ //first try to use javascript to add a css class within jQuery
+    // This function is called when the user mouses over a city in the list.
+    // It changes the background color of the city to dark-blue and the text color to white.
+    $(document).on({ 
       mouseenter: function () {
-        $(this).css('background-color', '#0d6efd');
+        $(this).css('background-color', '#27374D');
         $(this).css('color', '#ffffff');
-        $(this).css('opacity', '75%');
       },
       mouseleave: function () {
         $(this).css('background-color', '');
@@ -287,6 +298,6 @@ $(function () {
         $(this).css('opacity', '100%');
       }
     },
-      'li.list-group-item' //targeting the li in the list-group-item
+      'li.list-group-item' 
     );
   });
